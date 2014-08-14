@@ -47,10 +47,14 @@ int main(void) {
 
             printf("got token: %s\n", token);
 
+            /* this works out the product using a rolling 13 character window */
             while (*end) {
-                product *= *end++ - '0';
+                /* multiply the product by the value on the "end" of the window */
+                product *= *end++ - '0'; /* subtract '0' because the ptr value is the ascii code and this cheat-casts it back to int value */
 
+                /* only after we've multiplied 13 digits should we start using these values */
                 if (i >= 13) {
+                    /* divide the product by the value on the "front" of the window */
                     product /= *start++ - '0';
     
                     printf("product: %lu\n", product);
